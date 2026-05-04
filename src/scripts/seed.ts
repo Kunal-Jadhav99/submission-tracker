@@ -6,7 +6,7 @@ const users = [
   {
     name: "owais mukri",
     email: "owaishussain259@gmail.com",
-    password: "password123",
+    password: "12345678",
     color: "#8B5CF6",
     gradient: "from-violet-500 to-purple-600",
   },

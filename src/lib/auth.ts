@@ -15,21 +15,32 @@ export const authOptions: AuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        await connectDB();
-        const user = await UserModel.findOne({ email: credentials.email.toLowerCase() });
-        if (!user) return null;
+        try {
+          await connectDB();
+          const user = await UserModel.findOne({ email: credentials.email.toLowerCase() });
+          if (!user) {
+            console.log("NextAuth: User not found in DB");
+            return null;
+          }
 
-        const isValid = await bcrypt.compare(credentials.password, user.password);
-        if (!isValid) return null;
+          const isValid = await bcrypt.compare(credentials.password, user.password);
+          if (!isValid) {
+            console.log("NextAuth: Invalid password");
+            return null;
+          }
 
-        return {
-          id: user._id.toString(),
-          name: user.name,
-          email: user.email,
-          color: user.color,
-          gradient: user.gradient,
-          avatar: user.avatar,
-        };
+          return {
+            id: user._id.toString(),
+            name: user.name,
+            email: user.email,
+            color: user.color,
+            gradient: user.gradient,
+            avatar: user.avatar,
+          };
+        } catch (error) {
+          console.error("NextAuth Authorize Error:", error);
+          return null;
+        }
       },
     }),
   ],
