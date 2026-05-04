@@ -28,6 +28,26 @@ async function connectDB() {
   if (!cached.promise) {
     cached.promise = mongoose.connect(MONGODB_URI, {
       bufferCommands: false,
+    }).then(async (mongoose) => {
+      // Import all models to prevent MissingSchemaError during .populate() in serverless environments
+      await Promise.all([
+        import("@/models/User"),
+        import("@/models/Subject"),
+        import("@/models/Assignment"),
+        import("@/models/Submission"),
+        import("@/models/Task"),
+        import("@/models/TaskCompletion"),
+        import("@/models/Exam"),
+        import("@/models/Mark"),
+        import("@/models/Attendance"),
+        import("@/models/Resource"),
+        import("@/models/StudySession"),
+        import("@/models/Syllabus"),
+        import("@/models/RevisionTopic"),
+        import("@/models/Comment"),
+        import("@/models/ActivityLog")
+      ]).catch(e => console.error("Error pre-loading models:", e));
+      return mongoose;
     });
   }
 
