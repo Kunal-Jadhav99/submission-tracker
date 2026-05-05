@@ -45,7 +45,10 @@ async function connectDB() {
         import("@/models/Syllabus"),
         import("@/models/RevisionTopic"),
         import("@/models/Comment"),
-        import("@/models/ActivityLog")
+        import("@/models/ActivityLog"),
+        import("@/models/Practical"),
+        import("@/models/PracticalSubmission"),
+        import("@/models/Timetable"),
       ]).catch(e => console.error("Error pre-loading models:", e));
       return mongoose;
     });

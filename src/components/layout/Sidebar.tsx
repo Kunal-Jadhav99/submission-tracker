@@ -7,25 +7,26 @@ import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, BookOpen, ClipboardList, FileCheck, BarChart3,
   Calendar, Users, BookMarked, GraduationCap, Library, Clock,
-  Activity, Search, X, Layers
+  Activity, Search, X, Layers, FlaskConical, Settings, UserCircle
 } from "lucide-react";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/subjects", label: "Subjects", icon: BookOpen },
   { href: "/assignments", label: "Assignments", icon: ClipboardList },
-  { href: "/tasks", label: "Tasks & Forms", icon: FileCheck },
+  { href: "/practicals", label: "Practicals", icon: FlaskConical },
   { href: "/exams", label: "Exams & Marks", icon: GraduationCap },
   { href: "/attendance", label: "Attendance", icon: Users },
+  { href: "/tasks", label: "Tasks & Forms", icon: FileCheck },
   { href: "/resources", label: "Resources", icon: Library },
-  { href: "/subjects", label: "Subjects", icon: BookOpen },
-  { href: "/study-sessions", label: "Study Sessions", icon: BookMarked },
   { href: "/syllabus", label: "Syllabus", icon: Layers },
+  { href: "/study-sessions", label: "Study Sessions", icon: BookMarked },
   { href: "/calendar", label: "Calendar", icon: Calendar },
   { href: "/stats", label: "Statistics", icon: BarChart3 },
   { href: "/activity", label: "Activity Log", icon: Activity },
   { href: "/search", label: "Search", icon: Search },
-  { href: "/profile", label: "Profile", icon: Users },
-  { href: "/settings", label: "Settings", icon: LayoutDashboard },
+  { href: "/profile", label: "Profile", icon: UserCircle },
+  { href: "/settings", label: "Settings", icon: Settings },
 ];
 
 interface SidebarProps {
