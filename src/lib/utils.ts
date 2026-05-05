@@ -19,10 +19,20 @@ export const SUBJECT_COLORS = [
 ];
 
 export const PRIORITY_CONFIG = {
+  Critical: { color: "text-rose-300", bg: "bg-rose-600/20", border: "border-rose-500/50", dot: "bg-rose-300" },
   High: { color: "text-rose-400", bg: "bg-rose-500/10", border: "border-rose-500/30", dot: "bg-rose-400" },
   Medium: { color: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/30", dot: "bg-amber-400" },
   Low: { color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/30", dot: "bg-emerald-400" },
 };
+
+/** Auto-calculates priority based on days remaining until dueDate */
+export function autoPriority(dueDate: Date | string): keyof typeof PRIORITY_CONFIG {
+  const days = getDaysUntil(dueDate);
+  if (days < 0) return "Critical";
+  if (days <= 2) return "High";
+  if (days <= 6) return "Medium";
+  return "Low";
+}
 
 export const MOTIVATIONAL_QUOTES = [
   "The secret of getting ahead is getting started. 🚀",
