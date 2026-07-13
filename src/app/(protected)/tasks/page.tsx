@@ -20,8 +20,8 @@ export default function TasksPage() {
 
   const userId = (session?.user as any)?.id;
 
-  async function load() {
-    setLoading(true);
+  async function load(silent = false) {
+    if (!silent) setLoading(true);
     try {
       const [t, u] = await Promise.all([
         fetch("/api/tasks").then(r => r.json()),
@@ -30,7 +30,7 @@ export default function TasksPage() {
       setTasks(Array.isArray(t) ? t : []);
       setUsers(Array.isArray(u) ? u : []);
     } catch { toast.error("Failed to load tasks"); }
-    setLoading(false);
+    if (!silent) setLoading(false);
   }
 
   useEffect(() => { load(); }, []);
@@ -59,12 +59,17 @@ export default function TasksPage() {
   async function toggleComplete(taskId: string, targetUserId?: string) {
     setPickerOpen(null);
     try {
-      await fetch("/api/task-completions", {
+      const res = await fetch("/api/task-completions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ taskId, userId: targetUserId }),
       });
-      load();
+      if (res.ok) {
+        load(true);
+      } else {
+        const errData = await res.json();
+        toast.error(errData.error || "Failed to update completion");
+      }
     } catch { toast.error("Failed to update completion"); }
   }
 
@@ -189,7 +194,10 @@ export default function TasksPage() {
 
                     {/* Mark for others — dropdown trigger */}
                     <button
-                      onClick={() => setPickerOpen(pickerOpen === t._id ? null : t._id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPickerOpen(pickerOpen === t._id ? null : t._id);
+                      }}
                       className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-secondary/40 text-foreground hover:bg-secondary/60 flex items-center gap-1 transition-colors"
                       title="Mark complete for someone else"
                     >
