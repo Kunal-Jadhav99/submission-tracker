@@ -17,5 +17,5 @@ npm-debug.log*
 # OS
 .DS_Store
 
-#claude
-.claude.md
+# claude
+claude.md
