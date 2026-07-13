@@ -30,9 +30,9 @@ export default function LoginPage() {
 
   const quickLogin = async (userEmail: string) => {
     setEmail(userEmail);
-    setPassword("password123");
+    setPassword("12345678");
     setLoading(true);
-    const result = await signIn("credentials", { email: userEmail, password: "password123", redirect: false });
+    const result = await signIn("credentials", { email: userEmail, password: "12345678", redirect: false });
     setLoading(false);
     if (!result?.error) { router.push("/dashboard"); router.refresh(); }
     else toast.error("Login failed");
@@ -109,9 +109,9 @@ export default function LoginPage() {
             <p className="text-xs text-muted-foreground text-center mb-3">Quick login (demo)</p>
             <div className="grid grid-cols-3 gap-2">
               {[
-                { name: "Alex", email: "alex@study.com", gradient: "from-violet-500 to-purple-600" },
-                { name: "Blake", email: "blake@study.com", gradient: "from-blue-500 to-cyan-500" },
-                { name: "Casey", email: "casey@study.com", gradient: "from-emerald-500 to-teal-500" },
+                { name: "Owais", email: "owaishussain259@gmail.com", gradient: "from-violet-500 to-purple-600" },
+                { name: "Nofil", email: "shaikh.nofil.07@gmail.com", gradient: "from-blue-500 to-cyan-500" },
+                { name: "Kunal", email: "kunal.j9921@gmail.com", gradient: "from-emerald-500 to-teal-500" },
               ].map((u) => (
                 <button
                   key={u.email}

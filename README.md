@@ -60,9 +60,9 @@ npm run seed
 *Note: You can modify the user details (names, emails, colors) in `src/scripts/seed.ts` before running the script if you wish.*
 
 Default credentials for testing:
-- **Alex**: `alex@study.com` / `password123`
-- **Blake**: `blake@study.com` / `password123`
-- **Casey**: `casey@study.com` / `password123`
+- **Owais**: `owaishussain259@gmail.com` / `12345678`
+- **Nofil**: `shaikh.nofil.07@gmail.com` / `12345678`
+- **Kunal**: `kunal.j9921@gmail.com` / `12345678`
 
 ### 5. Run the Application locally
 ```bash
