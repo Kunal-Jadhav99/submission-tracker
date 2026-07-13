@@ -12,6 +12,8 @@ const ActivityLogSchema = new Schema({
   itemType: { type: String, default: "" },
   details: { type: String, default: "" },
   reactions: [ReactionSchema],
+  // Extra structured metadata (e.g. for task completions: forUserId, forUserName, isSelf)
+  meta: { type: Schema.Types.Mixed, default: null },
 }, { timestamps: true });
 
 export default models.ActivityLog || model("ActivityLog", ActivityLogSchema);

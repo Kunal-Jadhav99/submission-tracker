@@ -14,7 +14,9 @@ export async function GET() {
     .populate("createdBy", "name color gradient")
     .populate("subTasks.assignedTo", "name color")
     .sort({ deadline: 1 });
-  const completions = await TaskCompletionModel.find({}).populate("user", "name color gradient");
+  const completions = await TaskCompletionModel.find({})
+    .populate("user", "name color gradient")
+    .populate("markedBy", "name color gradient");
   const data = tasks.map((t) => ({
     ...t.toObject(),
     completions: completions.filter((c) => c.task.toString() === t._id.toString()),
