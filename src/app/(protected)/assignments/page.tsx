@@ -87,8 +87,11 @@ export default function AssignmentsPage() {
     countMap[sid] = (countMap[sid] || 0) + 1;
   });
 
+  const PRIORITY_ORDER: Record<string, number> = { Critical: 0, High: 1, Medium: 2, Low: 3 };
   const subjectAssignments = selectedSubject
-    ? assignments.filter(a => (a.subject?._id ?? a.subject) === selectedSubject)
+    ? assignments
+        .filter(a => (a.subject?._id ?? a.subject) === selectedSubject)
+        .sort((a, b) => PRIORITY_ORDER[autoPriority(a.dueDate)] - PRIORITY_ORDER[autoPriority(b.dueDate)])
     : [];
 
   const currentSubject = subjects.find(s => s._id === selectedSubject);

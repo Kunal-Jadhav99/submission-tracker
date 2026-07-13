@@ -81,8 +81,13 @@ export default function PracticalsPage() {
     countMap[sid] = (countMap[sid] || 0) + 1;
   });
 
+  const PRIORITY_ORDER: Record<string, number> = { Critical: 0, High: 1, Medium: 2, Low: 3 };
   const currentSubject = subjects.find(s => s._id === selectedSubject);
-  const subjectPracticals = selectedSubject ? practicals.filter(p => (p.subject?._id ?? p.subject) === selectedSubject) : [];
+  const subjectPracticals = selectedSubject
+    ? practicals
+        .filter(p => (p.subject?._id ?? p.subject) === selectedSubject)
+        .sort((a, b) => PRIORITY_ORDER[autoPriority(a.dueDate)] - PRIORITY_ORDER[autoPriority(b.dueDate)])
+    : [];
 
   return (
     <div className="page-container space-y-6">

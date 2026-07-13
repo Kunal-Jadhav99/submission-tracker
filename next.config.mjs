@@ -6,6 +6,13 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["mongoose"],
   },
+  // Allow larger request bodies for file uploads (10 MB)
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb",
+    },
+    responseLimit: "10mb",
+  },
 };
 
 export default nextConfig;
