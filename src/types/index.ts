@@ -15,7 +15,7 @@ export interface User {
 export interface Subject {
   _id: string;
   name: string;
-  colorIndex: number;
+  color: number;
   creditHours: number;
   professor: string;
   archived: boolean;

@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
   const filter: Record<string, unknown> = {};
   if (subjectId) filter.subject = subjectId;
   const assignments = await AssignmentModel.find(filter)
-    .populate("subject", "name colorIndex")
+    .populate("subject", "name color")
     .populate("createdBy", "name color gradient")
     .sort({ dueDate: 1 });
   const submissions = await SubmissionModel.find({}).populate("user", "name color gradient");
@@ -49,7 +49,7 @@ export async function PUT(req: NextRequest) {
   await connectDB();
   const { id, ...body } = await req.json();
   const assignment = await AssignmentModel.findByIdAndUpdate(id, body, { new: true })
-    .populate("subject", "name colorIndex")
+    .populate("subject", "name color")
     .populate("createdBy", "name color gradient");
   return NextResponse.json(assignment);
 }

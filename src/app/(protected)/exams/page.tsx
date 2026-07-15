@@ -12,9 +12,9 @@ const EXAM_TYPES = ["IA1", "IA2", "Semester"] as const;
 type ExamType = typeof EXAM_TYPES[number];
 
 const TYPE_CONFIG: Record<ExamType, { label: string; color: string; bg: string; border: string }> = {
-  IA1:      { label: "Internal Assessment 1", color: "text-violet-400", bg: "bg-violet-500/10", border: "border-violet-500/30" },
-  IA2:      { label: "Internal Assessment 2", color: "text-blue-400",   bg: "bg-blue-500/10",   border: "border-blue-500/30"   },
-  Semester: { label: "Semester Exam",         color: "text-amber-400",  bg: "bg-amber-500/10",  border: "border-amber-500/30"  },
+  IA1: { label: "Internal Assessment 1", color: "text-violet-400", bg: "bg-violet-500/10", border: "border-violet-500/30" },
+  IA2: { label: "Internal Assessment 2", color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/30" },
+  Semester: { label: "Semester Exam", color: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/30" },
 };
 
 export default function ExamsPage() {
@@ -84,7 +84,7 @@ export default function ExamsPage() {
   });
 
   const currentSubject = subjects.find(s => s._id === selectedSubject);
-  const subjectColor = currentSubject ? SUBJECT_COLORS[(currentSubject.colorIndex ?? 0) % SUBJECT_COLORS.length] : null;
+  const subjectColor = currentSubject ? SUBJECT_COLORS[(currentSubject.color ?? 0) % SUBJECT_COLORS.length] : null;
 
   const subjectExams = selectedSubject
     ? exams.filter(ex => (ex.subject?._id ?? ex.subject) === selectedSubject)

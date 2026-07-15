@@ -9,7 +9,7 @@ export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   await connectDB();
-  const subjects = await SubjectModel.find({}).populate("createdBy", "name color").sort({ createdAt: -1 });
+  const subjects = await SubjectModel.find({}).populate("createdBy", "name ").sort({ createdAt: -1 });
   return NextResponse.json(subjects);
 }
 

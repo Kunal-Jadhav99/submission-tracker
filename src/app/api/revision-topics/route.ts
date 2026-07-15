@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   const filter: Record<string, unknown> = {};
   if (subjectId) filter.subject = subjectId;
   const topics = await RevisionTopicModel.find(filter)
-    .populate("subject", "name colorIndex")
+    .populate("subject", "name color")
     .populate("user", "name color gradient")
     .sort({ createdAt: -1 });
   return NextResponse.json(topics);

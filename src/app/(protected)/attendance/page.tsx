@@ -16,7 +16,7 @@ type TimetableEntry = {
   _id: string;
   dayOfWeek: number;
   period: number;
-  subject: { _id: string; name: string; colorIndex?: number } | null;
+  subject: { _id: string; name: string; color?: number } | null;
   startTime?: string;
   endTime?: string;
 };
@@ -171,7 +171,7 @@ export default function AttendancePage() {
               ) : (
                 <div className="space-y-3">
                   {todayClasses.map(entry => {
-                    const color = SUBJECT_COLORS[(entry.subject?.colorIndex ?? 0) % SUBJECT_COLORS.length];
+                    const color = SUBJECT_COLORS[(entry.subject?.color ?? 0) % SUBJECT_COLORS.length];
                     const rec = getRecord(entry.subject!._id, selectedDate);
                     const status = rec?.status;
                     const stats = getSubjectStats(entry.subject!._id);
@@ -247,7 +247,7 @@ export default function AttendancePage() {
                 </div>
               ) : (
                 subjects.map(sub => {
-                  const color = SUBJECT_COLORS[(sub.colorIndex ?? 0) % SUBJECT_COLORS.length];
+                  const color = SUBJECT_COLORS[(sub.color ?? 0) % SUBJECT_COLORS.length];
                   const { present, total, pct } = getSubjectStats(sub._id);
                   const status = getAttendanceStatus(pct);
                   const needed = pct < 75 && total > 0 ? Math.ceil((0.75 * total - present) / 0.25) : 0;
@@ -327,9 +327,9 @@ export default function AttendancePage() {
                           isSelected ? "ring-2 ring-primary" : "",
                           isToday ? "font-black" : "",
                           summary === "present" ? "bg-emerald-500/20 text-emerald-400" :
-                          summary === "absent"  ? "bg-rose-500/20 text-rose-400" :
-                          summary === "mixed"   ? "bg-amber-500/20 text-amber-400" :
-                          "hover:bg-secondary/50 text-muted-foreground"
+                            summary === "absent" ? "bg-rose-500/20 text-rose-400" :
+                              summary === "mixed" ? "bg-amber-500/20 text-amber-400" :
+                                "hover:bg-secondary/50 text-muted-foreground"
                         )}
                       >
                         {format(day, "d")}
@@ -372,7 +372,7 @@ export default function AttendancePage() {
                         {WORK_DAYS.map(day => {
                           const entry = timetable.find(t => t.dayOfWeek === day && t.period === period);
                           const subject = entry?.subject;
-                          const color = subject ? SUBJECT_COLORS[(subject.colorIndex ?? 0) % SUBJECT_COLORS.length] : null;
+                          const color = subject ? SUBJECT_COLORS[(subject.color ?? 0) % SUBJECT_COLORS.length] : null;
                           const isEditing = editCell?.day === day && editCell?.period === period;
 
                           return (

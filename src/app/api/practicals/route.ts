@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
   const filter: Record<string, unknown> = {};
   if (subjectId) filter.subject = subjectId;
   const practicals = await PracticalModel.find(filter)
-    .populate("subject", "name colorIndex")
+    .populate("subject", "name color")
     .populate("createdBy", "name")
     .sort({ dueDate: 1 });
   const submissions = await PracticalSubmissionModel.find({}).populate("user", "name color gradient");

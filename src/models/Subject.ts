@@ -2,7 +2,7 @@ import { Schema, model, models } from "mongoose";
 
 const SubjectSchema = new Schema({
   name: { type: String, required: true },
-  colorIndex: { type: Number, default: 0 },
+  color: { type: Number, default: 0 },
   creditHours: { type: Number, default: 3 },
   professor: { type: String, default: "" },
   archived: { type: Boolean, default: false },

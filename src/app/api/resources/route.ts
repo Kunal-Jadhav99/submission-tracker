@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   // Exclude heavy fileData from list view
   const resources = await ResourceModel.find(filter)
     .select("-fileData")
-    .populate("subject", "name colorIndex")
+    .populate("subject", "name color")
     .populate("uploadedBy", "name color gradient")
     .sort({ uploadedAt: -1 });
   return NextResponse.json(resources);

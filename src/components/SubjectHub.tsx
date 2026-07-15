@@ -8,7 +8,7 @@ interface Subject {
   name: string;
   code?: string;
   professor?: string;
-  colorIndex?: number;
+  color?: number;
   archived?: boolean;
 }
 
@@ -44,7 +44,7 @@ export default function SubjectHub({
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
       {active.map((s) => {
-        const color = SUBJECT_COLORS[(s.colorIndex ?? 0) % SUBJECT_COLORS.length];
+        const color = SUBJECT_COLORS[(s.color ?? 0) % SUBJECT_COLORS.length];
         const isActive = selected === s._id;
         const count = countMap[s._id] ?? 0;
 

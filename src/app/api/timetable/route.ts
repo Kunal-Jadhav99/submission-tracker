@@ -10,7 +10,7 @@ export async function GET() {
   await connectDB();
   const userId = (session.user as any).id;
   const entries = await TimetableModel.find({ createdBy: userId })
-    .populate("subject", "name colorIndex")
+    .populate("subject", "name color")
     .sort({ dayOfWeek: 1, period: 1 });
   return NextResponse.json(entries);
 }

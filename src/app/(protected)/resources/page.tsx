@@ -7,11 +7,11 @@ import { toast } from "sonner";
 import SubjectHub from "@/components/SubjectHub";
 
 const TYPE_ICONS: Record<string, React.ReactNode> = {
-  pdf:   <FileText className="w-4 h-4 text-rose-400" />,
+  pdf: <FileText className="w-4 h-4 text-rose-400" />,
   image: <ImageIcon className="w-4 h-4 text-blue-400" />,
   video: <Video className="w-4 h-4 text-amber-400" />,
-  link:  <LinkIcon className="w-4 h-4 text-emerald-400" />,
-  note:  <FileText className="w-4 h-4 text-violet-400" />,
+  link: <LinkIcon className="w-4 h-4 text-emerald-400" />,
+  note: <FileText className="w-4 h-4 text-violet-400" />,
   other: <File className="w-4 h-4 text-muted-foreground" />,
 };
 
@@ -138,7 +138,7 @@ export default function ResourcesPage() {
   });
 
   const currentSubject = subjects.find(s => s._id === selectedSubject);
-  const subjectColor = currentSubject ? SUBJECT_COLORS[(currentSubject.colorIndex ?? 0) % SUBJECT_COLORS.length] : null;
+  const subjectColor = currentSubject ? SUBJECT_COLORS[(currentSubject.color ?? 0) % SUBJECT_COLORS.length] : null;
 
   const subjectResources = selectedSubject
     ? resources.filter(r => (r.subject?._id ?? r.subject) === selectedSubject)

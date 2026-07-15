@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   const filter: Record<string, unknown> = {};
   if (subjectId) filter.subject = subjectId;
   const syllabi = await SyllabusModel.find(filter)
-    .populate("subject", "name colorIndex")
+    .populate("subject", "name color")
     .populate("uploadedBy", "name color");
   return NextResponse.json(syllabi);
 }

@@ -11,8 +11,8 @@ export async function GET() {
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   await connectDB();
   const exams = await ExamModel.find({})
-    .populate("subject", "name colorIndex")
-    .populate("createdBy", "name color")
+    .populate("subject", "name color")
+    .populate("createdBy", "name ")
     .sort({ date: -1 });
   const marks = await MarkModel.find({})
     .populate("user", "name color gradient")

@@ -90,12 +90,12 @@ export default function AssignmentsPage() {
   const PRIORITY_ORDER: Record<string, number> = { Critical: 0, High: 1, Medium: 2, Low: 3 };
   const subjectAssignments = selectedSubject
     ? assignments
-        .filter(a => (a.subject?._id ?? a.subject) === selectedSubject)
-        .sort((a, b) => PRIORITY_ORDER[autoPriority(a.dueDate)] - PRIORITY_ORDER[autoPriority(b.dueDate)])
+      .filter(a => (a.subject?._id ?? a.subject) === selectedSubject)
+      .sort((a, b) => PRIORITY_ORDER[autoPriority(a.dueDate)] - PRIORITY_ORDER[autoPriority(b.dueDate)])
     : [];
 
   const currentSubject = subjects.find(s => s._id === selectedSubject);
-  const subjectColor = currentSubject ? SUBJECT_COLORS[(currentSubject.colorIndex ?? 0) % SUBJECT_COLORS.length] : null;
+  const subjectColor = currentSubject ? SUBJECT_COLORS[(currentSubject.color ?? 0) % SUBJECT_COLORS.length] : null;
 
   return (
     <div className="page-container space-y-6">
@@ -141,7 +141,7 @@ export default function AssignmentsPage() {
             <div className="glass rounded-2xl p-16 text-center border border-dashed border-border/50">
               <CheckCircle2 className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
               <p className="text-muted-foreground font-medium">No assignments for this subject yet</p>
-              <button onClick={openNew} className="btn-primary mt-4 mx-auto flex items-center gap-2"><Plus className="w-4 h-4"/> Add First Assignment</button>
+              <button onClick={openNew} className="btn-primary mt-4 mx-auto flex items-center gap-2"><Plus className="w-4 h-4" /> Add First Assignment</button>
             </div>
           ) : (
             subjectAssignments.map(a => (
@@ -162,23 +162,23 @@ export default function AssignmentsPage() {
             <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <label className="text-xs text-muted-foreground mb-1 block">Title *</label>
-                <input value={form.title} onChange={e => setForm({...form, title: e.target.value})} className="input-field" placeholder="Assignment title" required />
+                <input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} className="input-field" placeholder="Assignment title" required />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="text-xs text-muted-foreground mb-1 block">Due Date *</label>
-                  <input type="date" value={form.dueDate} onChange={e => setForm({...form, dueDate: e.target.value})} className="input-field" required />
+                  <input type="date" value={form.dueDate} onChange={e => setForm({ ...form, dueDate: e.target.value })} className="input-field" required />
                 </div>
                 <div>
                   <label className="text-xs text-muted-foreground mb-1 block">Category</label>
-                  <select value={form.category} onChange={e => setForm({...form, category: e.target.value})} className="input-field">
+                  <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} className="input-field">
                     {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
               </div>
               <div>
                 <label className="text-xs text-muted-foreground mb-1 block">Description</label>
-                <textarea value={form.description} onChange={e => setForm({...form, description: e.target.value})} className="input-field resize-none" rows={2} />
+                <textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} className="input-field resize-none" rows={2} />
               </div>
               <div className="flex gap-2 pt-2">
                 <button type="submit" className="btn-primary flex-1">{editItem ? "Update" : "Create"}</button>

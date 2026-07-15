@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   if (subjectId) filter.subject = subjectId;
 
   const records = await AttendanceModel.find(filter)
-    .populate("subject", "name colorIndex")
+    .populate("subject", "name color")
     .sort({ date: -1 });
   return NextResponse.json(records);
 }

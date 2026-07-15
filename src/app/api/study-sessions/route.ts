@@ -10,7 +10,7 @@ export async function GET() {
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   await connectDB();
   const sessions = await StudySessionModel.find({})
-    .populate("subject", "name colorIndex")
+    .populate("subject", "name color")
     .populate("createdBy", "name color gradient")
     .populate("attendees", "name color gradient")
     .sort({ scheduledDate: 1 });
